@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:quanlygom/views/product_list/widgets/product_action.dart';
+import 'package:quanlygom/views/product_list/widgets/product_image.dart';
+import 'package:quanlygom/views/product_list/widgets/product_info.dart';
+import 'package:sizer/sizer.dart';
 
 class ProductItem extends StatelessWidget {
   final String name;
@@ -20,85 +24,19 @@ class ProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 2,
-      margin: const EdgeInsets.all(12),
+      margin: EdgeInsets.zero,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // 🔹 Ảnh sản phẩm
-          Center(
-            child: Container(
-              height: 200,
-              width: double.infinity, // vẫn nên full width
-              alignment: Alignment.center,
-              child: Container(
-                width: 100,
-                height: 100,
-                decoration: BoxDecoration(
-                  color: Colors.blue.shade50,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: const Icon(Icons.category, size: 50, color: Colors.blue),
-              ),
-            ),
-          ),
-
-          // 🔹 Thông tin sản phẩm
-          Padding(
-            padding: const EdgeInsets.all(12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  name,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 6),
-
-                Text(
-                  "Giá: ${price.toInt()} VNĐ",
-                  style: const TextStyle(
-                    color: Colors.redAccent,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-
-                const SizedBox(height: 4),
-
-                Text(
-                  "Tồn kho: $stock",
-                  style: const TextStyle(fontSize: 12, color: Colors.grey),
-                ),
-              ],
-            ),
-          ),
-
+          ProductImage(), // 👈 Tách phần ảnh
+          ProductInfo(
+            name: name,
+            price: price,
+            stock: stock,
+          ), // 👈 Tách thông tin
           const Divider(height: 1),
-
-          // 🔹 Action buttons
-          Row(
-            children: [
-              Expanded(
-                child: TextButton.icon(
-                  onPressed: onEdit,
-                  icon: const Icon(Icons.edit, size: 18),
-                  label: const Text("Sửa"),
-                  style: TextButton.styleFrom(foregroundColor: Colors.blue),
-                ),
-              ),
-              Expanded(
-                child: TextButton.icon(
-                  onPressed: onDelete,
-                  icon: const Icon(Icons.delete, size: 18),
-                  label: const Text("Xóa"),
-                  style: TextButton.styleFrom(foregroundColor: Colors.red),
-                ),
-              ),
-            ],
-          ),
+          ProductActions(onEdit: onEdit, onDelete: onDelete), // 👈 Tách nút bấm
         ],
       ),
     );
