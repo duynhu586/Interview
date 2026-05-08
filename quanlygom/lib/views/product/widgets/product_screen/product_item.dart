@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:quanlygom/views/product_list/widgets/product_action.dart';
-import 'package:quanlygom/views/product_list/widgets/product_image.dart';
-import 'package:quanlygom/views/product_list/widgets/product_info.dart';
-import 'package:sizer/sizer.dart';
+import 'package:quanlygom/views/product/widgets/product_screen/product_action.dart';
+import 'package:quanlygom/views/product/widgets/product_screen/product_image.dart';
+import 'package:quanlygom/views/product/widgets/product_screen/product_info.dart';
 
 class ProductItem extends StatelessWidget {
   final String name;
@@ -29,14 +28,13 @@ class ProductItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ProductImage(), // 👈 Tách phần ảnh
-          ProductInfo(
-            name: name,
-            price: price,
-            stock: stock,
-          ), // 👈 Tách thông tin
+          ProductImage(),
+
+          ProductInfo(name: name, price: price, stock: stock),
+
           const Divider(height: 1),
-          ProductActions(onEdit: onEdit, onDelete: onDelete), // 👈 Tách nút bấm
+
+          ProductActions(onEdit: onEdit, onDelete: onDelete),
         ],
       ),
     );
